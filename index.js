@@ -1,21 +1,25 @@
 let app = require('express')();
-let axios = require('axios');
+let request = require('request');
 
 app.get('/', (req, res) => {
   res.send('Hello');
 });
 
 app.get('/leagues/:id', async (req, res) => {
-  try {
-    let data = await request(
-      `https://api.eslgaming.com/play/v1/leagues/${req.params.id}`,
-      {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/x-www-form-urlencoded',
+  request(
+    `https://api.eslgaming.com/play/v1/leagues/${req.params.id}`,
+    {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    (err, data, body) => {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(body);
       }
-    );
-    res.json(data);
-  } catch (err) {}
+    }
+  );
 });
 
 app.listen(5000, () => {
