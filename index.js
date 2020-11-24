@@ -39,6 +39,25 @@ app.get('/leagues/:id/results', (req, res) => {
   );
 });
 
+app.get('/leagues/:id/contestants', (req, res) => {
+  request(
+    `https://api.eslgaming.com/play/v1/leagues/${req.params.id}/contestants`,
+    {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    (err, data, body) => {
+      if (err) {
+        console.log(data);
+        res.json(err);
+      } else {
+        console.log(data);
+        res.json(body);
+      }
+    }
+  );
+});
+
 app.listen(5000, () => {
   console.log('Server is listening at port 4000');
 });
