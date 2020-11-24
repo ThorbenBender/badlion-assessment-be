@@ -58,6 +58,6 @@ app.get('/leagues/:id/contestants', (req, res) => {
   );
 });
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('Server is listening at port 4000');
 });
