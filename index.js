@@ -51,10 +51,25 @@ app.get('/leagues/:id/contestants', (req, res) => {
     },
     (err, data, body) => {
       if (err) {
-        console.log(data);
         res.json(err);
       } else {
-        console.log(data);
+        res.json(body);
+      }
+    }
+  );
+});
+
+app.get('/leagues', (req, res) => {
+  request(
+    `https://api.eslgaming.com/play/v1/leagues`,
+    {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    (err, data, body) => {
+      if (err) {
+        res.json(err);
+      } else {
         res.json(body);
       }
     }
